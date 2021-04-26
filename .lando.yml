@@ -6,3 +6,6 @@ services:
   appserver:
     build:
       - composer install
+      - drush sql-drop -y && drush sqlc < drupal.sql
+      - drush cim -y
+      - drush cr
