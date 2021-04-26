@@ -2,3 +2,7 @@ name: some-app
 recipe: drupal8
 config:
   webroot: web
+services:
+  appserver:
+    build:
+      - composer install
