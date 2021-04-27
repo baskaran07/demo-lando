@@ -2,10 +2,14 @@ name: some-app
 recipe: drupal8
 config:
   webroot: web
+  database: mysql:5.7.24
 services:
   appserver:
     build:
       - composer install
-      - drush sql-drop -y && drush sqlc < drupal.sql
-      - drush cim -y
-      - drush cr
+events:
+  post-start:
+    - echo "Database import started"
+    - drush sqlc < drupal.sql
+    # - drush cim -y
+    - drush cr
